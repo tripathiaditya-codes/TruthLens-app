@@ -3,8 +3,8 @@ from tavily import TavilyClient
 from dotenv import load_dotenv
 import os 
 # ------------------------ Tavily Setup ------------------------
-load_dotenv()  # loads .env file
-TAVILY_API_KEY = os.getenv("TAVILY_API_KEY")  # fetch key safely
+TAVILY_API_KEY = st.secrets["TAVILY_API_KEY"]  # ✅ fetch from Streamlit Secrets
+client = TavilyClient(api_key=TAVILY_API_KEY)
 
 # Initialize Tavily client
 if not TAVILY_API_KEY:
@@ -111,3 +111,4 @@ def app():
 # ------------------------ Run App ------------------------
 if __name__ == "__main__":
     app()
+
