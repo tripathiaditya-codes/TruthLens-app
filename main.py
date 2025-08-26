@@ -1,36 +1,14 @@
 import streamlit as st
 from tavily import TavilyClient
-from dotenv import load_dotenv
 import os 
+
 # ------------------------ Tavily Setup ------------------------
 TAVILY_API_KEY = st.secrets["TAVILY_API_KEY"]  # ✅ fetch from Streamlit Secrets
 client = TavilyClient(api_key=TAVILY_API_KEY)
 
-# Initialize Tavily client
-if not TAVILY_API_KEY:
-    st.error("❌ Tavily API Key not found. Please set it in your .env file.")
-else:
-    client = TavilyClient(api_key=TAVILY_API_KEY)  # 🔑 Your Tavily API key here
-client = TavilyClient(api_key=TAVILY_API_KEY)
-
 # ------------------------ Session State ------------------------
-if "authenticated" not in st.session_state:
-    st.session_state.authenticated = False
 if "history" not in st.session_state:
     st.session_state.history = []
-
-# ------------------------ Authentication ------------------------
-# def auth_page():
-#     st.markdown("<h1 style='text-align:center; color:#00FFAA;'>🔒 Login to TruthLens</h1>", unsafe_allow_html=True)
-#     st.markdown("<p style='text-align:center; color:grey;'>Enter your credentials</p>", unsafe_allow_html=True)
-#     username = st.text_input("Username")
-#     password = st.text_input("Password", type="password")
-#     if st.button("Login"):
-#         if username == "admin" and password == "admin":
-#             st.session_state.authenticated = True
-#             st.success("✅ Login successful!")
-#         else:
-#             st.error("❌ Invalid credentials!")
 
 # ------------------------ Tavily Search ------------------------
 def search_query(query: str, max_results=10):
@@ -56,7 +34,7 @@ def main_page():
     """, unsafe_allow_html=True)
 
     st.markdown("<h1 style='text-align:center; color:#00FFAA;'>🔍 TruthLens</h1>", unsafe_allow_html=True)
-    st.markdown("<p style='text-align:center; color:grey;'>AI-powered Fact Checker (Source Finder)</p>", unsafe_allow_html=True)
+    st.markdown("<p style='text-align:center; color:grey;'>AI-powered Fact Retrieval (Source Finder)</p>", unsafe_allow_html=True)
 
     # Sidebar history
     st.sidebar.title("🕘 History")
@@ -101,15 +79,6 @@ def main_page():
             else:
                 st.info("No sources found.")
 
-# ------------------------ App Router ------------------------
-def app():
-    if not st.session_state.authenticated:
-        auth_page()
-    else:
-        main_page()
-
 # ------------------------ Run App ------------------------
 if __name__ == "__main__":
-    app()
-
-
+    main_page()
