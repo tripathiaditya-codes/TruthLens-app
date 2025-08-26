@@ -20,17 +20,17 @@ if "history" not in st.session_state:
     st.session_state.history = []
 
 # ------------------------ Authentication ------------------------
-def auth_page():
-    st.markdown("<h1 style='text-align:center; color:#00FFAA;'>🔒 Login to TruthLens</h1>", unsafe_allow_html=True)
-    st.markdown("<p style='text-align:center; color:grey;'>Enter your credentials</p>", unsafe_allow_html=True)
-    username = st.text_input("Username")
-    password = st.text_input("Password", type="password")
-    if st.button("Login"):
-        if username == "admin" and password == "admin":
-            st.session_state.authenticated = True
-            st.success("✅ Login successful!")
-        else:
-            st.error("❌ Invalid credentials!")
+# def auth_page():
+#     st.markdown("<h1 style='text-align:center; color:#00FFAA;'>🔒 Login to TruthLens</h1>", unsafe_allow_html=True)
+#     st.markdown("<p style='text-align:center; color:grey;'>Enter your credentials</p>", unsafe_allow_html=True)
+#     username = st.text_input("Username")
+#     password = st.text_input("Password", type="password")
+#     if st.button("Login"):
+#         if username == "admin" and password == "admin":
+#             st.session_state.authenticated = True
+#             st.success("✅ Login successful!")
+#         else:
+#             st.error("❌ Invalid credentials!")
 
 # ------------------------ Tavily Search ------------------------
 def search_query(query: str, max_results=10):
@@ -111,4 +111,5 @@ def app():
 # ------------------------ Run App ------------------------
 if __name__ == "__main__":
     app()
+
 
